@@ -1,40 +1,36 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 
-int main() {
-    int qnt_filhos, temporizador, pid, status;
+int main(void)
+{
+  int i, j, pid, filhos, seg, status;
 
-    printf("\nFilhos a criar: ");
-    scanf("%d", &qnt_filhos);
+  printf("Filhos a criar: ");
+  scanf("%d", &filhos);
 
-    printf("\nSleep time: ");
-    scanf("%d", &temporizador);
+  printf("Sleep time: ");
+  scanf("%d", &seg);
 
-    for (int i = 0; i < qnt_filhos; i++) {
-        pid = fork();
-
-        if (pid < 0) {
-            perror("Erro ao criar processo filho");
-            exit(EXIT_FAILURE);
-        } else if (pid == 0) {
-            printf("Filho %d criado.\n", getpid());
-            sleep(temporizador);
-            printf("Filho %d acordou.\n", getpid());
-            exit(EXIT_SUCCESS);
-        }
+  for(i = 0; i<filhos; i++) {
+    pid = fork();
+    if(pid == 0) {
+        printf("Filho %d criado\n", getpid(), seg);
+        sleep(seg);
+        printf("Filho %d acordou.\n", getpid());
+        exit(0); 
     }
 
-    while (1) {
-        pid = wait(&status);
-        
-        if (pid == -1) {
-            printf("Todos os filhos acordaram.\n");
-        } else {
-            printf("Filho %d acordou.\n", pid);
-        }
-    }
+  }
 
-    return 0;
+  do {
+      pid = wait(0);
+      if(pid != -1) {
+          printf("Todos os filhos acordaram\n", pid);
+      } else {
+          printf("Processo Pai acordou\n");
+      }
+
+  }while (pid != -1);
 }
