@@ -31,7 +31,6 @@ int main() {
         
         if (pid == -1) {
             printf("Todos os filhos acordaram.\n");
-            break;
         } else {
             printf("Filho %d acordou.\n", pid);
         }
