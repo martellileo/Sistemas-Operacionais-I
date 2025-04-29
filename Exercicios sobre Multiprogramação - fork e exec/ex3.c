@@ -5,23 +5,22 @@
 
 int main(void)
 {
-  int i, j, pid, filhos, seg, status;
+  int pid, filhos, tempo, status;
 
   printf("Filhos a criar: ");
   scanf("%d", &filhos);
 
   printf("Sleep time: ");
-  scanf("%d", &seg);
+  scanf("%d", &tempo);
 
-  for(i = 0; i<filhos; i++) {
+  for(int i = 0; i<filhos; i++) {
     pid = fork();
     if(pid == 0) {
-        printf("Filho %d criado\n", getpid(), seg);
-        sleep(seg);
+        printf("Filho %d criado\n", getpid());
+        sleep(tempo);
         printf("Filho %d acordou.\n", getpid());
         exit(0); 
     }
-
   }
 
   do {
