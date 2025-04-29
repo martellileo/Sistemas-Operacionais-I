@@ -5,7 +5,7 @@
 
 int main(void)
 {
-  int pid, filhos, tempo, status;
+  int pid, filhos, tempo;
 
   printf("Filhos a criar: ");
   scanf("%d", &filhos);
